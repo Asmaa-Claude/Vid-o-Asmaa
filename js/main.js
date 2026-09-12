@@ -51,26 +51,6 @@
     onScroll();
   }
 
-  /* ---- Apparition progressive des blocs ---- */
-  var revealables = document.querySelectorAll('.reveal');
-  if ('IntersectionObserver' in window && revealables.length) {
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-
-    revealables.forEach(function (el, i) {
-      el.style.transitionDelay = (i % 4) * 70 + 'ms';
-      observer.observe(el);
-    });
-  } else {
-    revealables.forEach(function (el) { el.classList.add('is-visible'); });
-  }
-
   /* ---- Une seule question de FAQ ouverte à la fois ---- */
   var faqs = document.querySelectorAll('.faq');
   faqs.forEach(function (item) {

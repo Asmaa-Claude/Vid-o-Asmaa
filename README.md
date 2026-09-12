@@ -27,7 +27,7 @@ python3 -m http.server 8000
 
 1. **Adresse e-mail** — remplace `contact@business-simple.fr` dans `index.html` (section contact et lien direct) et dans `js/main.js` (constante `CONTACT_EMAIL`).
 2. **Témoignages** — section « Résultats » d'`index.html` : remplace les blocs d'exemple par de vrais retours de clientes. Ne publie jamais de témoignage inventé.
-3. **Tarifs** — section « Les formules » : ajuste les prix et le contenu de chaque formule, puis supprime la phrase « Les tarifs ci-dessous sont des exemples ».
+3. **Formules** — section « Les formules » : ajuste le contenu de chaque formule. Aucun tarif n'est affiché : ils sont annoncés pendant l'appel découverte. Si tu veux les afficher un jour, ajoute un `<p class="price">` dans chaque `<article class="plan">` et le style correspondant.
 4. **Mentions légales** — complète tous les champs entre crochets dans `mentions-legales.html`.
 5. **Photo** — tu peux remplacer le visuel du hero (`.hero-visual`) par ta photo si tu en as une.
 

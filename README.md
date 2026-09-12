@@ -47,15 +47,29 @@ Le script envoie alors les données en JSON et affiche un message de confirmatio
 N'importe quel hébergeur de site statique convient : GitHub Pages, Netlify, Vercel, ou un
 hébergement classique par FTP. Il suffit de déposer les fichiers tels quels.
 
-## Couleurs
+## Couleurs — nuancier Kozellia
 
-Définies en haut de `css/styles.css` (variables `:root`) — change-les à un seul endroit
-pour reskinner tout le site.
+Définies en haut de `css/styles.css` (variables `:root`). Toute la charte tient sur un
+seul axe chaud crème → bordeaux : aucun blanc pur, aucun noir pur.
 
-| Variable | Valeur | Usage |
+| Variable | Valeur | Rôle |
 |---|---|---|
-| `--terra` | `#B85C38` | Couleur principale, boutons |
-| `--gold` | `#C9963F` | Accents, badges |
-| `--cream` | `#FBF7F2` | Fond général |
-| `--sand` | `#F1E7DB` | Sections alternées |
-| `--ink` | `#221C18` | Texte et sections foncées |
+| `--papier` | `#FBF4EA` | Fond de page, respiration |
+| `--creme` | `#F5E3D0` | Fond de marque, sections alternées |
+| `--sable` | `#EBD6C0` | Cartes, séparations, survol |
+| `--brique` | `#B8352A` | États actifs, alertes douces |
+| `--rouge` | `#921F15` | Signature, appels à l'action |
+| `--bordeaux` | `#6E1710` | Texte dense, sections foncées, pied de page |
+
+Trois valeurs dérivées complètent l'axe pour le texte, avec des contrastes conformes
+au niveau AA sur fond `--papier` :
+
+| Variable | Valeur | Contraste | Rôle |
+|---|---|---|---|
+| `--ligne` | `#E3CDB4` | — | Filets de séparation |
+| `--encre-mid` | `#6B5145` | 6,66:1 | Texte courant secondaire |
+| `--encre-soft` | `#7E6153` | 5,17:1 | Mentions, étiquettes |
+| `--clair` | `#D9BCA4` | 6,51:1 sur bordeaux | Texte sur fond foncé |
+
+Le rouge signature n'apparaît qu'à trois endroits : les appels à l'action, la formule
+phare et les numéros d'étapes. C'est ce qui lui garde sa valeur.

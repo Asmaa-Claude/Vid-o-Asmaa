@@ -73,3 +73,9 @@ au niveau AA sur fond `--papier` :
 
 Le rouge signature n'apparaît qu'à trois endroits : les appels à l'action, la formule
 phare et les numéros d'étapes. C'est ce qui lui garde sa valeur.
+
+## Bilan Vitalité (systeme.io)
+
+Le dossier `bilan-vitalite/` contient le guide de montage du questionnaire « Bilan Vitalité »
+sur systeme.io : tags, pages, 20 questions, workflows, emails de résultat, fiches programme et recette.
+Voir `bilan-vitalite/GUIDE-SYSTEME-IO.md`.

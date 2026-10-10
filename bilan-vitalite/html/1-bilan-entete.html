@@ -1,0 +1,37 @@
+<!-- Bilan Vitalité — EN-TÊTE (page 1, à placer AU-DESSUS du sondage)
+     systeme.io : ajoute un élément « Code HTML » / « Raw HTML » et colle tout ce bloc. -->
+<style>
+  .bv-head{--bv-ink:#1f2d2a;--bv-soft:#4b5d58;--bv-accent:#2f7d6d;--bv-accent-bg:#e8f3ef;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--bv-ink);text-align:center;max-width:640px;margin:0 auto;padding:28px 16px 12px;box-sizing:border-box}
+  .bv-head *{box-sizing:border-box}
+  .bv-head .bv-eyebrow{display:inline-block;margin:0 0 14px;padding:6px 12px;border-radius:999px;
+    background:var(--bv-accent-bg);color:var(--bv-accent);font-size:13px;font-weight:600;letter-spacing:.02em;line-height:1.2}
+  .bv-head .bv-title{margin:0 0 12px;font-size:30px;line-height:1.15;font-weight:800;color:var(--bv-ink);letter-spacing:-.01em}
+  .bv-head .bv-title span{color:var(--bv-accent);white-space:nowrap}
+  .bv-head .bv-sub{margin:0 auto 20px;max-width:540px;font-size:17px;line-height:1.5;color:var(--bv-soft)}
+  .bv-head .bv-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 18px;margin:0;padding:0;list-style:none}
+  .bv-head .bv-trust li{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:var(--bv-ink);margin:0;padding:0}
+  .bv-head .bv-trust svg{flex:none;width:18px;height:18px;color:var(--bv-accent)}
+  @media (min-width:700px){.bv-head .bv-title{font-size:40px}.bv-head{padding-top:44px}}
+</style>
+
+<header class="bv-head">
+  <p class="bv-eyebrow">Auto-évaluation gratuite</p>
+  <h1 class="bv-title">Votre Bilan Vitalité <span>en 3&nbsp;minutes</span></h1>
+  <p class="bv-sub">Fatigue qui dure, défenses en baisse, sommeil léger, peau terne&nbsp;? Découvrez si une consultation en vitaminothérapie est utile pour vous, et quel programme pourrait vous correspondre.</p>
+  <ul class="bv-trust">
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9"/></svg>
+      20&nbsp;questions
+    </li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+      Résultat personnalisé par email
+    </li>
+    <li>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg>
+      Gratuit et sans engagement
+    </li>
+  </ul>
+</header>

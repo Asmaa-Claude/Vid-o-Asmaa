@@ -612,3 +612,16 @@ tant que la fiche J+1 n'est pas partie). Le profil 14 vérifie que le nettoyage 
      d'abord par le médecin, mets cette réponse sur `PRECAUTION` (→ R2).
 5. **Remplacer partout :** `[ton compte]`, `[ton email]`, `[lien politique de confidentialité]`,
    `[lien de réservation]`, `[Signature]`, et la variable `[Prénom]`.
+
+---
+
+## Annexe — Blocs HTML prêts à coller
+
+Dossier `bilan-vitalite/html/` (chaque fichier se colle tel quel dans un élément « Code HTML » de systeme.io) :
+
+| Fichier | Où le coller |
+|---|---|
+| `1-bilan-entete.html` | Page 1, **au-dessus** de l'élément Sondage |
+| `2-bilan-mention.html` | Page 1, **sous** l'élément Sondage |
+| `3-remerciement.html` | Page 2 (remplace `@[ton compte]`) |
+| `apercu.html` | Aperçu des deux pages, à ouvrir dans un navigateur — ne pas coller |

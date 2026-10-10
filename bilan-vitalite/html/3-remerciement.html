@@ -1,0 +1,38 @@
+<!-- Bilan Vitalité — PAGE DE REMERCIEMENT (étape 2 du tunnel)
+     systeme.io : ajoute un élément « Code HTML » / « Raw HTML » et colle tout ce bloc.
+     À remplacer : @[ton compte] (2 fois, dont le lien). -->
+<style>
+  .bv-thanks{--bv-ink:#1f2d2a;--bv-soft:#4b5d58;--bv-accent:#2f7d6d;--bv-accent-bg:#e8f3ef;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    color:var(--bv-ink);max-width:560px;margin:0 auto;padding:40px 16px;box-sizing:border-box;text-align:center}
+  .bv-thanks *{box-sizing:border-box}
+  .bv-thanks .bv-icon{width:72px;height:72px;margin:0 auto 20px;border-radius:50%;background:var(--bv-accent-bg);
+    display:flex;align-items:center;justify-content:center;color:var(--bv-accent)}
+  .bv-thanks .bv-icon svg{width:34px;height:34px}
+  .bv-thanks .bv-title{margin:0 0 12px;font-size:30px;line-height:1.2;font-weight:800;color:var(--bv-ink)}
+  .bv-thanks .bv-text{margin:0 0 24px;font-size:17px;line-height:1.55;color:var(--bv-soft)}
+  .bv-thanks .bv-steps{margin:0 0 28px;padding:18px 20px;list-style:none;text-align:left;
+    background:#f6f8f7;border:1px solid #e3e9e7;border-radius:14px}
+  .bv-thanks .bv-steps li{display:flex;gap:12px;align-items:flex-start;margin:0;padding:8px 0;font-size:15px;line-height:1.45;color:var(--bv-ink)}
+  .bv-thanks .bv-steps b{flex:none;width:24px;height:24px;border-radius:50%;background:var(--bv-accent);color:#fff;
+    font-size:13px;line-height:24px;text-align:center;font-weight:700}
+  .bv-thanks .bv-foot{margin:0;font-size:15px;line-height:1.5;color:var(--bv-soft)}
+  .bv-thanks .bv-foot a{color:var(--bv-accent);font-weight:700;text-decoration:none}
+  .bv-thanks .bv-foot a:hover{text-decoration:underline}
+  @media (min-width:700px){.bv-thanks .bv-title{font-size:36px}.bv-thanks{padding-top:64px}}
+</style>
+
+<section class="bv-thanks">
+  <div class="bv-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+  </div>
+  <h1 class="bv-title">Votre bilan est en route</h1>
+  <p class="bv-text">Votre résultat personnalisé arrive dans votre boîte mail d'ici quelques minutes.</p>
+  <ol class="bv-steps">
+    <li><b>1</b><span>Ouvrez votre boîte mail.</span></li>
+    <li><b>2</b><span>Rien reçu&nbsp;? Vérifiez l'onglet <strong>Promotions</strong> ou vos <strong>spams</strong>.</span></li>
+    <li><b>3</b><span>Ajoutez notre adresse à vos contacts pour recevoir la suite.</span></li>
+  </ol>
+  <p class="bv-foot">Une question en attendant&nbsp;? Écrivez-nous sur Instagram&nbsp;:
+    <a href="https://www.instagram.com/[ton compte]/" target="_blank" rel="noopener">@[ton compte]</a></p>
+</section>

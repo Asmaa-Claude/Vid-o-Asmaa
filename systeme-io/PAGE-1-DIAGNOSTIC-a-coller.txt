@@ -179,8 +179,8 @@
   "use strict";
 
   /* ====== LA SEULE LIGNE À MODIFIER ======
-     Collez ici l'adresse de votre page de capture (étape 2 du tunnel). */
-  var PAGE_CAPTURE = "https://VOTRE-COMPTE.systeme.io/capture-diagnostic";
+     Adresse de la page des résultats. */
+  var PAGE_CAPTURE = "https://afarg26.systeme.io/b9584fb8";
   /* ======================================= */
 
   var STORE  = "ladiag_state_v1";
@@ -396,7 +396,7 @@
       '<p class="la-kicker">Diagnostic terminé</p>' +
       '<h2 class="la-h2">' + (first ? esc(first) + ', vos résultats sont prêts.' : 'Vos résultats sont prêts.') + '</h2>' +
       '<p class="la-lede">Vos quatre scores sont calculés, avec votre niveau de dépendance à la nicotine, le maillon par lequel commencer et un premier pas concret.</p>' +
-      '<p class="la-lede">Indiquez-moi simplement où vous les envoyer : vous les découvrez à l\'écran juste après.</p>' +
+      '<p class="la-lede">Cliquez ci-dessous pour les découvrir tout de suite.</p>' +
       '<div class="la-nav">' +
         '<button class="la-btn" type="button" data-la="go">Voir mes résultats</button>' +
         '<button class="la-btn la-ghost" type="button" data-la="back">Retour</button>' +

@@ -1,0 +1,59 @@
+<!--
+  OPTIONNEL — à coller dans un élément « Code HTML » de la PAGE DE CAPTURE (étape 2),
+  sous le formulaire natif Systeme.io.
+
+  Rôle : pré-remplir le prénom, et recopier un résumé du diagnostic dans un champ
+  personnalisé du contact, pour qu'Assia le lise dans la fiche avant l'appel.
+
+  Préparation dans Systeme.io :
+  1. Paramètres → Champs personnalisés → créer un champ texte, identifiant : diagnostic
+  2. Ajouter ce champ au formulaire de la page de capture.
+     (Vous pouvez le masquer avec la classe CSS du bloc, ou le laisser visible :
+      la personne voit alors son résumé.)
+  3. Tester avec votre propre adresse : la fiche contact doit afficher le résumé.
+-->
+<script>
+(function () {
+  "use strict";
+
+  var CHAMP_DIAGNOSTIC = "diagnostic";  /* identifiant du champ personnalisé */
+  var CHAMP_PRENOM     = "first_name";  /* champ prénom natif de Systeme.io */
+
+  var r = null;
+  try { r = JSON.parse(localStorage.getItem("ladiag_result_v1") || "null"); } catch (e) {}
+  if (!r || !r.scores) return;
+
+  var PROFILS = { soupape: "Cigarette-soupape", duo: "Duo cigarette et sucre", cercle: "Cercle de la culpabilité" };
+  var resume =
+    "Profil : " + (PROFILS[r.profil] || r.profil) +
+    " | Maillon principal : " + r.topName +
+    " | Stress " + r.scores.stress + "% · Tabac " + r.scores.tabac + "% · Sucre " + r.scores.sucre +
+    "% · Culpabilité " + r.scores.culpabilite + "%" +
+    " | Nicotine HSI " + r.hsi + "/6 (" + r.dependance + ")" +
+    " | " + r.cigarettes + " cig/j, 1re : " + r.premiere + ", fume depuis " + r.anciennete +
+    " | Tentatives : " + r.tentatives +
+    " | Craintes : " + (r.craintesTextes || []).join(", ") +
+    " | Motivation : " + (r.motivation || []).join(", ") +
+    " | Prête : " + r.prete + "/5 · Délai : " + r.delai + " · Format : " + r.format +
+    " | Santé particulière : " + r.sante + " | Âge : " + r.age;
+
+  /* Les champs de Systeme.io sont gérés par React : il faut passer par le setter natif. */
+  function fill(el, value) {
+    var proto = el.tagName === "TEXTAREA" ? HTMLTextAreaElement.prototype : HTMLInputElement.prototype;
+    var setter = Object.getOwnPropertyDescriptor(proto, "value").set;
+    setter.call(el, value);
+    el.dispatchEvent(new Event("input", { bubbles: true }));
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+  }
+
+  var tries = 0;
+  var timer = setInterval(function () {
+    tries++;
+    var d = document.querySelector('[name="' + CHAMP_DIAGNOSTIC + '"]');
+    var p = document.querySelector('[name="' + CHAMP_PRENOM + '"]');
+    if (p && r.prenom && !p.value) fill(p, r.prenom);
+    if (d) { fill(d, resume); clearInterval(timer); }
+    if (tries > 40) clearInterval(timer);
+  }, 250);
+})();
+</script>

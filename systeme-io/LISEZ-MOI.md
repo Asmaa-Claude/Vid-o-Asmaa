@@ -12,3 +12,13 @@ Fonctionnement : le diagnostic calcule les scores, les garde dans le navigateur 
 Les trois pages doivent être sur le même domaine (votre sous-domaine systeme.io ou votre domaine perso), sinon les résultats ne sont pas retrouvés.
 
 Sur la page de capture, ajoutez une case de consentement : les réponses concernent la santé (RGPD).
+
+## Version en codes séparés (dossier `codes-separes/`)
+
+Chaque page est découpée en trois fichiers texte, à coller chacun dans son propre élément « Code HTML », sur la même page :
+
+1. `…-1-html.txt` : la structure
+2. `…-2-style-css.txt` : l'apparence
+3. `…-3-script-js.txt` : le fonctionnement (c'est là que se trouvent les adresses à modifier)
+
+Règle importante : sur la page, l'élément du script (3) doit être placé **en dessous** de l'élément HTML (1). Le style (2) peut être n'importe où sur la page.

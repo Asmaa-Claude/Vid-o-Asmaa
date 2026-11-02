@@ -1,0 +1,136 @@
+<script>
+(function () {
+  "use strict";
+
+  /* ====== LES DEUX LIGNES À MODIFIER ======
+     1. L'adresse de réservation de l'appel découverte (calendrier Systeme.io, Calendly...).
+     2. L'adresse de la page du diagnostic (étape 1), pour celles qui arrivent ici sans l'avoir fait. */
+  var LIEN_RDV        = "https://VOTRE-LIEN-DE-RESERVATION";
+  var PAGE_DIAGNOSTIC = "https://VOTRE-COMPTE.systeme.io/diagnostic";
+  /* ========================================= */
+
+  var RESULT = "ladiag_result_v1";
+  var card = document.getElementById("laResCard");
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  var r = null;
+  try { r = JSON.parse(localStorage.getItem(RESULT) || "null"); } catch (e) {}
+
+  if (!r || !r.scores) {
+    card.innerHTML =
+      '<p class="la-kicker">Libre &amp; Apaisée</p>' +
+      '<h1 class="la-h1">Merci, votre inscription est bien reçue.</h1>' +
+      '<p class="la-lede">Nous ne retrouvons pas vos réponses sur cet appareil (navigation privée ou autre navigateur). Vous pouvez refaire le diagnostic en 6 minutes, ou réserver directement votre appel gratuit.</p>' +
+      '<div class="la-cta"><a class="la-btn" href="' + LIEN_RDV + '">Je réserve mon appel gratuit de 20 minutes</a>' +
+      '<p class="la-hint" style="margin-top:14px"><a href="' + PAGE_DIAGNOSTIC + '" style="color:inherit">Refaire le diagnostic</a></p></div>';
+    return;
+  }
+
+  var NAMES = { stress: "Votre stress", tabac: "La cigarette", sucre: "Le sucre", culpabilite: "La culpabilité" };
+  var ORDER = ["stress", "tabac", "sucre", "culpabilite"];
+
+  var PROFILS = {
+    soupape: {
+      titre: "La cigarette-<em>soupape</em>",
+      texte: "Le stress monte, la cigarette le fait redescendre… pour un moment. Elle est devenue votre façon de souffler, parfois votre seule vraie pause de la journée. Le problème, c'est qu'elle entretient le stress qu'elle semble calmer : le manque revient, et avec lui la tension."
+    },
+    duo: {
+      titre: "Le duo <em>cigarette et sucre</em>",
+      texte: "Quand vous fumez moins, le sucré prend le relais, et inversement. Ce n'est pas un manque de volonté : ce sont deux façons de calmer le même stress. C'est pour cela que traiter l'un sans l'autre ne tient pas : on déplace la béquille sans toucher à ce qui la rend nécessaire."
+    },
+    cercle: {
+      titre: "Le cercle de la <em>culpabilité</em>",
+      texte: "Vous avez déjà essayé, parfois plusieurs fois. Chaque reprise a laissé un goût d'échec qui ajoute du stress… et relance l'envie. Si les essais passés n'ont pas tenu, c'est qu'il manquait des outils, pas du courage."
+    }
+  };
+
+  var PREMIER_PAS = {
+    stress: "Trois fois par jour, et à chaque fois que la tension monte, offrez-vous 3 minutes de respiration lente : inspirez sur 5 secondes, expirez sur 5 secondes. C'est une pause qui apaise vraiment, sans rien allumer ni rien manger.",
+    tabac: "Pendant 3 jours, notez chaque cigarette et ce qui se passait juste avant (café, contrariété, ennui, fatigue). Vous allez repérer vos cigarettes « automatiques » : ce sont elles qu'on remplacera en premier.",
+    sucre: "Repérez votre moment sucré le plus fréquent (souvent la fin de journée) et préparez-lui une autre pause : une boisson chaude, quelques minutes dehors, une respiration. Il ne s'agit pas de vous priver, mais de vous donner un autre choix.",
+    culpabilite: "Écrivez ce qui avait fonctionné lors de vos essais passés, même quelques jours. Ces jours-là comptent : ils montrent que vous savez faire, et ce qui vous a manqué ensuite est précisément ce que nous travaillerons."
+  };
+
+  var DEP = {
+    faible:  "Votre dépendance physique à la nicotine semble faible : vos envies sont surtout liées aux habitudes et aux émotions.",
+    moyenne: "Votre dépendance physique à la nicotine semble moyenne : des substituts nicotiniques bien dosés peuvent vraiment vous aider à passer le cap du manque.",
+    forte:   "Votre dépendance physique à la nicotine semble forte : des substituts nicotiniques bien dosés dès le départ seront importants, pour que le manque ne vienne pas s'ajouter au stress."
+  };
+
+  function niveau(p) { return p >= 67 ? "très marqué" : (p >= 34 ? "marqué" : "léger"); }
+
+  var prenom = r.prenom ? esc(r.prenom) : "";
+  var pr = PROFILS[r.profil] || PROFILS.soupape;
+  var h = "";
+
+  h += '<p class="la-kicker">Votre diagnostic</p>';
+  h += '<h1 class="la-h1">' + (prenom ? prenom + ", votre" : "Votre") + ' profil : ' + pr.titre + '</h1>';
+  h += '<p class="la-lede">' + pr.texte + '</p>';
+
+  /* Les quatre maillons */
+  h += '<div class="la-block"><h2 class="la-h3">Les quatre maillons de <em>votre cercle</em></h2>' +
+       '<p class="la-hint">Plus la barre est longue, plus ce maillon pèse aujourd\'hui.</p><div class="la-bars">';
+  ORDER.forEach(function (k) {
+    var p = Math.max(0, Math.min(100, r.scores[k] || 0));
+    h += '<div class="' + (k === r.top ? "la-top" : "") + '"><div class="la-bar-head"><b>' + NAMES[k] + '</b><span>' +
+         niveau(p) + '</span></div><div class="la-track"><div class="la-fill" data-w="' + p + '"></div></div></div>';
+  });
+  h += '</div></div>';
+
+  /* Stress d'abord */
+  h += '<div class="la-block"><h2 class="la-h3">Pourquoi on commence par <em>le stress</em></h2>';
+  if (r.top === "stress") {
+    h += '<p>Votre stress est le maillon le plus lourd de votre cercle. C\'est lui qui déclenche l\'envie de cigarette et de sucré : tant qu\'il n\'a pas d\'autre soupape, chaque tentative d\'arrêt repose sur vos seules forces.</p>';
+  } else {
+    h += '<p>Chez vous, c\'est <b>' + NAMES[r.top].toLowerCase() + '</b> qui pèse le plus aujourd\'hui. Mais ce maillon est relié aux autres : le stress déclenche l\'envie, la cigarette ou le sucre la calment un moment, puis la culpabilité relance le stress. Agir sur le stress, c\'est desserrer tout le cercle à la fois.</p>';
+  }
+  h += '</div>';
+
+  /* Nicotine */
+  var hsi = Math.max(0, Math.min(6, r.hsi || 0));
+  var dots = "";
+  for (var i = 1; i <= 6; i++) dots += '<span class="la-dot' + (i <= hsi ? " on" : "") + '"></span>';
+  h += '<div class="la-block"><h2 class="la-h3">Votre dépendance à la nicotine</h2>' +
+       '<div class="la-box"><div class="la-dots" aria-hidden="true">' + dots + '</div>' +
+       '<p><b>' + hsi + ' / 6</b> — ' + (DEP[r.dependance] || DEP.moyenne) + '</p>' +
+       '<p class="la-hint">Calculé à partir du nombre de cigarettes par jour et du délai avant la première cigarette du matin, deux repères utilisés par les soignants.</p></div></div>';
+
+  /* Crainte vs scores */
+  if (r.craintesTextes && r.craintesTextes.length) {
+    var match = r.craintes.indexOf(r.top) > -1;
+    h += '<div class="la-block"><h2 class="la-h3">Ce que vous craignez, et ce que montrent vos réponses</h2>' +
+         '<p>Vous avez dit redouter : <b>' + r.craintesTextes.map(esc).join("</b> et <b>") + '</b>.</p>' +
+         (match
+           ? '<p>Votre ressenti est juste : c\'est bien ce maillon qui pèse le plus. C\'est une bonne nouvelle, car on sait par où commencer.</p>'
+           : '<p>Vos réponses montrent pourtant que c\'est <b>' + NAMES[r.top].toLowerCase() + '</b> qui pèse le plus aujourd\'hui. Souvent, la peur que l\'on met en avant n\'est pas ce qui fait reprendre : c\'est en travaillant le bon maillon que cette peur diminue.</p>') +
+         '</div>';
+  }
+
+  /* Premier pas */
+  h += '<div class="la-block"><h2 class="la-h3">Votre premier pas, <em>dès aujourd\'hui</em></h2>' +
+       '<div class="la-box"><p>' + (PREMIER_PAS[r.top] || PREMIER_PAS.stress) + '</p></div></div>';
+
+  /* Santé */
+  if (r.sante && r.sante !== "Non") {
+    h += '<div class="la-block"><div class="la-box la-alert"><p>Vous avez indiqué une situation de santé particulière. Nous en parlerons pendant l\'appel : l\'accompagnement s\'adapte, et se fait si besoin en lien avec votre médecin.</p></div></div>';
+  }
+
+  /* Appel à l'action */
+  var chaude = r.prete >= 4 && (r.delai === "Le plus vite possible" || r.delai === "Dans les prochaines semaines");
+  h += '<div class="la-cta">' +
+       '<h2 class="la-h3">' + (chaude ? "Vous êtes prête : <em>parlons-en</em>." : "Et maintenant, <em>on en parle</em> ?") + '</h2>' +
+       '<p class="la-lede">Pendant 20 minutes, gratuitement, nous relisons vos réponses ensemble. Je vous explique ce qui entretient vos envies de cigarette et de sucre, et vous repartez avec une piste concrète, que vous choisissiez d\'être accompagnée ou non.</p>' +
+       '<a class="la-btn" href="' + LIEN_RDV + '">Je réserve mon appel gratuit de 20 minutes</a>' +
+       '<p class="la-hint" style="margin-top:14px">Au cabinet ou en ligne · sans engagement</p></div>';
+
+  card.innerHTML = h;
+
+  setTimeout(function () {
+    var fills = card.querySelectorAll(".la-fill");
+    for (var j = 0; j < fills.length; j++) fills[j].style.width = fills[j].getAttribute("data-w") + "%";
+  }, 120);
+})();
+</script>

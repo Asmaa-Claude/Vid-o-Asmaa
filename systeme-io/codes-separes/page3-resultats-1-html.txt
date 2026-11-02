@@ -1,0 +1,6 @@
+<div id="la-res">
+  <div class="la-wrap">
+    <div class="la-card" id="laResCard"></div>
+    <p class="la-foot">Assia, infirmière · Libre &amp; Apaisée — Ce diagnostic ne remplace pas une consultation médicale. En cas de doute sur votre santé, parlez-en à votre médecin.</p>
+  </div>
+</div>

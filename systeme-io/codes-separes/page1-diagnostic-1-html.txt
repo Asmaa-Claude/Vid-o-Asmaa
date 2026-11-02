@@ -1,0 +1,29 @@
+<div id="la-diag">
+  <div class="la-wrap">
+    <div class="la-progress" id="laProgress" hidden>
+      <div class="la-rail" id="laRail" aria-hidden="true"></div>
+      <div class="la-step" id="laStep"></div>
+    </div>
+    <div class="la-card">
+      <section class="la-screen" id="laIntro">
+        <p class="la-kicker">Diagnostic Libre &amp; Apaisée</p>
+        <h1 class="la-h1">Et si, pour arrêter le tabac et le sucre, on commençait par <em>votre stress</em>&nbsp;?</h1>
+        <p class="la-lede">Vous fumez quand ça déborde, le sucré prend le relais le soir, et chaque tentative d'arrêt finit par céder au premier coup de stress. Ce n'est pas un manque de courage&nbsp;: il vous manquait des outils.</p>
+        <p class="la-lede">Ce diagnostic mesure les quatre maillons du cercle qui vous retient — le stress, la cigarette, le sucre et la culpabilité — et vous montre par lequel commencer.</p>
+        <div class="la-facts">
+          <span><b>6 minutes</b></span>
+          <span><b>24</b> questions</span>
+          <span><b>4</b> maillons mesurés</span>
+          <span>Résultats <b>immédiats</b></span>
+        </div>
+        <p class="la-hint">Répondez avec votre réalité d'aujourd'hui. Il n'y a pas de bonne réponse et aucun jugement&nbsp;: plus vous êtes sincère, plus le résultat vous sera utile.</p>
+        <div class="la-nav">
+          <button class="la-btn" id="laStart" type="button">Commencer mon diagnostic</button>
+          <button class="la-btn la-ghost" id="laResume" type="button" hidden>Reprendre où j'en étais</button>
+        </div>
+      </section>
+      <div id="laFlow"></div>
+    </div>
+    <p class="la-foot">Assia, infirmière · Libre &amp; Apaisée — Ce questionnaire ne remplace pas une consultation médicale.</p>
+  </div>
+</div>

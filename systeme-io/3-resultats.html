@@ -92,7 +92,7 @@
   /* ====== LES DEUX LIGNES À MODIFIER ======
      1. L'adresse de réservation de l'appel découverte (calendrier Systeme.io, Calendly...).
      2. L'adresse de la page du diagnostic (étape 1), pour celles qui arrivent ici sans l'avoir fait. */
-  var LIEN_RDV        = "https://VOTRE-LIEN-DE-RESERVATION";
+  var LIEN_RDV        = "https://afarg26.systeme.io/c14f47f6-0fd8b08c-73a0d068";
   var PAGE_DIAGNOSTIC = "https://VOTRE-COMPTE.systeme.io/diagnostic";
   /* ========================================= */
 
@@ -112,7 +112,7 @@
       '<h1 class="la-h1">Merci, votre inscription est bien reçue.</h1>' +
       '<p class="la-lede">Nous ne retrouvons pas vos réponses sur cet appareil (navigation privée ou autre navigateur). Vous pouvez refaire le diagnostic en 6 minutes, ou réserver directement votre appel gratuit.</p>' +
       '<div class="la-cta"><a class="la-btn" href="' + LIEN_RDV + '">Je réserve mon appel gratuit de 20 minutes</a>' +
-      '<p class="la-hint" style="margin-top:14px"><a href="' + PAGE_DIAGNOSTIC + '" style="color:inherit">Refaire le diagnostic</a></p></div>';
+      (PAGE_DIAGNOSTIC.indexOf("VOTRE-COMPTE") > -1 ? "" : '<p class="la-hint" style="margin-top:14px"><a href="' + PAGE_DIAGNOSTIC + '" style="color:inherit">Refaire le diagnostic</a></p>') + '</div>';
     return;
   }
 

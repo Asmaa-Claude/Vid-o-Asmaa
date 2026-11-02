@@ -366,7 +366,7 @@
 
     /* ====== LA SEULE LIGNE À MODIFIER ======
        Collez ici l'adresse de la page du diagnostic (page 1 du tunnel). */
-    var PAGE_DIAGNOSTIC = "https://afarg26.systeme.io/VOTRE-PAGE-DIAGNOSTIC";
+    var PAGE_DIAGNOSTIC = "https://afarg26.systeme.io/791c1948";
     /* ======================================= */
 
     var root = document.getElementById("lap-home");

@@ -1,0 +1,577 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+#la-diag {
+  --la-ground:   #F3F4EF;
+  --la-surface:  #FFFFFF;
+  --la-surface2: #F8F8F4;
+  --la-ink:      #22302A;
+  --la-soft:     #5B6B62;
+  --la-faint:    #8E9B93;
+  --la-rule:     #E1E5DD;
+  --la-firm:     #C9D1C6;
+  --la-sage:     #46695A;
+  --la-sage-bg:  #E5EDE7;
+  --la-rose:     #B5654F;
+  --la-display: "Fraunces", Georgia, serif;
+  --la-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--la-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--la-ink);
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+#la-diag *, #la-diag *::before, #la-diag *::after { box-sizing: border-box; }
+#la-diag [hidden] { display: none !important; }
+#la-diag .la-wrap { max-width: 640px; margin: 0 auto; padding: 0 4px; }
+#la-diag .la-progress { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+#la-diag .la-progress[hidden] { display: none; }
+#la-diag .la-rail { display: flex; gap: 4px; flex: 1; }
+#la-diag .la-seg { height: 3px; flex: 1; background: var(--la-firm); border-radius: 2px; transition: background .35s ease; }
+#la-diag .la-seg.la-done { background: var(--la-sage); }
+#la-diag .la-step {
+  font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--la-faint); white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+#la-diag .la-card {
+  background: var(--la-surface);
+  border: 1px solid var(--la-rule);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(34,48,42,.04), 0 12px 32px -16px rgba(34,48,42,.16);
+  padding: 40px;
+}
+@media (max-width: 560px) { #la-diag .la-card { padding: 22px; } }
+#la-diag .la-screen[hidden] { display: none; }
+@keyframes laRise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+#la-diag .la-anim { animation: laRise .34s cubic-bezier(.2,.7,.3,1) both; }
+#la-diag .la-kicker {
+  font-size: 11px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--la-sage); margin: 0 0 18px;
+}
+#la-diag .la-h1 {
+  font-family: var(--la-display); font-weight: 400; font-size: 42px; line-height: 1.08;
+  letter-spacing: -.015em; margin: 0 0 20px; color: var(--la-ink);
+}
+#la-diag .la-h1 em, #la-diag .la-h2 em { font-style: italic; color: var(--la-sage); }
+#la-diag .la-h2 {
+  font-family: var(--la-display); font-weight: 400; font-size: 32px; line-height: 1.14;
+  letter-spacing: -.01em; margin: 0 0 8px; color: var(--la-ink);
+}
+@media (max-width: 560px) {
+  #la-diag .la-h1 { font-size: 31px; }
+  #la-diag .la-h2 { font-size: 26px; }
+}
+#la-diag p { margin: 0 0 16px; color: var(--la-ink); }
+#la-diag .la-lede { color: var(--la-soft); font-size: 17px; }
+#la-diag .la-hint { color: var(--la-faint); font-size: 14px; }
+#la-diag .la-foot { color: var(--la-faint); font-size: 12px; text-align: center; margin: 16px 0 0; }
+#la-diag .la-facts {
+  display: flex; flex-wrap: wrap; gap: 6px 18px;
+  margin: 26px 0 30px; padding-top: 18px; border-top: 1px solid var(--la-rule);
+  font-size: 13px; color: var(--la-soft);
+}
+#la-diag .la-facts b { color: var(--la-ink); font-weight: 700; }
+#la-diag .la-q { padding: 22px 0; border-top: 1px solid var(--la-rule); }
+#la-diag .la-q:first-of-type { border-top: none; padding-top: 4px; }
+#la-diag fieldset { border: 0; margin: 0; padding: 0; min-width: 0; }
+#la-diag .la-stem {
+  font-weight: 500; font-size: 16px; line-height: 1.45; margin: 0 0 14px;
+  padding: 0; display: block; color: var(--la-ink);
+}
+#la-diag .la-pills { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+#la-diag .la-pills input, #la-diag .la-choices input {
+  position: absolute; opacity: 0; width: 1px; height: 1px; margin: 0; pointer-events: none;
+}
+#la-diag .la-pills label {
+  display: grid; place-items: center; height: 52px;
+  border: 1px solid var(--la-firm); border-radius: 4px; background: var(--la-surface2);
+  font-weight: 600; font-size: 16px; font-variant-numeric: tabular-nums;
+  color: var(--la-soft); cursor: pointer; margin: 0;
+  transition: background .16s, color .16s, border-color .16s;
+}
+#la-diag .la-pills label:hover { border-color: var(--la-sage); color: var(--la-ink); }
+#la-diag .la-pills input:checked + label { background: var(--la-sage); border-color: var(--la-sage); color: #fff; }
+#la-diag .la-pills input:focus-visible + label { outline: 2px solid var(--la-sage); outline-offset: 2px; }
+#la-diag .la-ends {
+  display: flex; justify-content: space-between; margin-top: 8px;
+  font-size: 12px; color: var(--la-faint);
+}
+#la-diag .la-choices { display: grid; gap: 7px; }
+#la-diag .la-choices label {
+  display: flex; align-items: center; gap: 11px; padding: 12px 15px; margin: 0;
+  border: 1px solid var(--la-firm); border-radius: 4px; background: var(--la-surface2);
+  cursor: pointer; font-size: 15px; line-height: 1.4; font-weight: 400; color: var(--la-ink);
+  transition: border-color .16s, background .16s;
+}
+#la-diag .la-choices label::before {
+  content: ""; flex: 0 0 auto; width: 15px; height: 15px;
+  border: 1.5px solid var(--la-firm); border-radius: 50%;
+  transition: border-color .16s, box-shadow .16s;
+}
+#la-diag .la-multi label::before { border-radius: 3px; }
+#la-diag .la-choices label:hover { border-color: var(--la-sage); }
+#la-diag .la-choices input:checked + label { border-color: var(--la-sage); background: var(--la-sage-bg); }
+#la-diag .la-choices input:checked + label::before { border-color: var(--la-sage); box-shadow: inset 0 0 0 4px var(--la-sage); }
+#la-diag .la-choices input:focus-visible + label { outline: 2px solid var(--la-sage); outline-offset: 2px; }
+#la-diag .la-choices input:disabled + label { opacity: .42; cursor: not-allowed; }
+#la-diag input[type="text"] {
+  font-family: var(--la-body); font-size: 16px; color: var(--la-ink);
+  background: var(--la-surface2); border: 1px solid var(--la-firm); border-radius: 4px;
+  padding: 13px 15px; width: 100%; max-width: 320px;
+}
+#la-diag input[type="text"]:focus-visible { outline: 2px solid var(--la-sage); outline-offset: 1px; border-color: var(--la-sage); }
+#la-diag .la-nav {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  margin-top: 30px; padding-top: 22px; border-top: 1px solid var(--la-rule);
+}
+#la-diag .la-btn {
+  font-family: var(--la-body); font-weight: 700; font-size: 15px; letter-spacing: .01em;
+  padding: 14px 26px; border-radius: 4px; border: 1px solid var(--la-sage);
+  background: var(--la-sage); color: #fff; cursor: pointer; text-decoration: none;
+  display: inline-block; line-height: 1.3; transition: opacity .16s;
+}
+#la-diag .la-btn:hover { opacity: .88; color: #fff; }
+#la-diag .la-ghost { background: transparent; border-color: transparent; color: var(--la-soft); font-weight: 600; padding: 14px 6px; }
+#la-diag .la-ghost:hover { color: var(--la-ink); opacity: 1; }
+#la-diag .la-spacer { flex: 1 1 auto; }
+#la-diag .la-nag { font-size: 13px; color: var(--la-rose); font-weight: 600; margin: 0; }
+#la-diag .la-nag[hidden] { display: none; }
+@media (prefers-reduced-motion: reduce) {
+  #la-diag .la-anim { animation: none; }
+  #la-diag .la-seg { transition: none; }
+}
+</style>
+
+<div id="la-diag">
+  <div class="la-wrap">
+    <div class="la-progress" id="laProgress" hidden>
+      <div class="la-rail" id="laRail" aria-hidden="true"></div>
+      <div class="la-step" id="laStep"></div>
+    </div>
+    <div class="la-card">
+      <section class="la-screen" id="laIntro">
+        <p class="la-kicker">Diagnostic Libre &amp; Apaisée</p>
+        <h1 class="la-h1">Et si, pour arrêter le tabac et le sucre, on commençait par <em>votre stress</em>&nbsp;?</h1>
+        <p class="la-lede">Vous fumez quand ça déborde, le sucré prend le relais le soir, et chaque tentative d'arrêt finit par céder au premier coup de stress. Ce n'est pas un manque de courage&nbsp;: il vous manquait des outils.</p>
+        <p class="la-lede">Ce diagnostic mesure les quatre maillons du cercle qui vous retient — le stress, la cigarette, le sucre et la culpabilité — et vous montre par lequel commencer.</p>
+        <div class="la-facts">
+          <span><b>6 minutes</b></span>
+          <span><b>24</b> questions</span>
+          <span><b>4</b> maillons mesurés</span>
+          <span>Résultats <b>immédiats</b></span>
+        </div>
+        <p class="la-hint">Répondez avec votre réalité d'aujourd'hui. Il n'y a pas de bonne réponse et aucun jugement&nbsp;: plus vous êtes sincère, plus le résultat vous sera utile.</p>
+        <div class="la-nav">
+          <button class="la-btn" id="laStart" type="button">Commencer mon diagnostic</button>
+          <button class="la-btn la-ghost" id="laResume" type="button" hidden>Reprendre où j'en étais</button>
+        </div>
+      </section>
+      <div id="laFlow"></div>
+    </div>
+    <p class="la-foot">Assia, infirmière · Libre &amp; Apaisée — Ce questionnaire ne remplace pas une consultation médicale.</p>
+  </div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ====== LA SEULE LIGNE À MODIFIER ======
+     Collez ici l'adresse de votre page de capture (étape 2 du tunnel). */
+  var PAGE_CAPTURE = "https://VOTRE-COMPTE.systeme.io/capture-diagnostic";
+  /* ======================================= */
+
+  var STORE  = "ladiag_state_v1";
+  var RESULT = "ladiag_result_v1";
+
+  /* Étape 1 : la situation (le tabac se mesure avec les 2 questions de l'indice HSI) */
+  var CONTEXT = [
+    { id: "prenom", type: "text", stem: "Pour commencer, quel est votre prénom ?", placeholder: "Votre prénom" },
+    { id: "age", type: "one", stem: "Quel âge avez-vous ?",
+      options: ["Moins de 30 ans", "30 à 39 ans", "40 à 49 ans", "50 à 59 ans", "60 ans et plus"] },
+    { id: "cigarettes", type: "one", stem: "Combien de cigarettes fumez-vous par jour ?",
+      options: [
+        { t: "10 ou moins", v: 0 },
+        { t: "11 à 20", v: 1 },
+        { t: "21 à 30", v: 2 },
+        { t: "Plus de 30", v: 3 },
+        { t: "J'ai arrêté récemment, mais l'envie est toujours là", v: 0 }
+      ] },
+    { id: "premiere", type: "one", stem: "Combien de temps après votre réveil fumez-vous votre première cigarette ?",
+      options: [
+        { t: "Dans les 5 minutes", v: 3 },
+        { t: "Entre 6 et 30 minutes", v: 2 },
+        { t: "Entre 31 et 60 minutes", v: 1 },
+        { t: "Après 60 minutes", v: 0 },
+        { t: "Je ne fume plus en ce moment", v: 0 }
+      ] },
+    { id: "anciennete", type: "one", stem: "Depuis combien de temps fumez-vous ?",
+      options: ["Moins de 5 ans", "5 à 10 ans", "10 à 20 ans", "Plus de 20 ans"] },
+    { id: "tentatives", type: "one", stem: "Avez-vous déjà essayé d'arrêter de fumer ?",
+      options: ["Jamais", "Une fois", "2 ou 3 fois", "Plus de 3 fois"] },
+    { id: "crainte", type: "many", max: 2,
+      stem: "Si vous arrêtiez demain, qu'est-ce qui vous ferait le plus peur ?",
+      note: "Deux réponses maximum. On comparera votre ressenti avec vos scores.",
+      options: [
+        { t: "Ne plus savoir comment gérer mon stress", p: "stress" },
+        { t: "Être irritable, nerveuse avec mes proches", p: "stress" },
+        { t: "Le manque physique de la cigarette", p: "tabac" },
+        { t: "Perdre ma seule vraie pause à moi", p: "tabac" },
+        { t: "Prendre du poids", p: "sucre" },
+        { t: "Remplacer la cigarette par le sucre", p: "sucre" },
+        { t: "Échouer encore une fois", p: "culpabilite" }
+      ] }
+  ];
+
+  /* Étapes 2 à 5 : les quatre maillons du cercle. 5 = totalement vrai = maillon lourd. */
+  var PILLARS = [
+    { key: "stress", n: 1, name: "Votre stress",
+      intro: "Le point de départ du cercle : ce qui déclenche l'envie.",
+      items: [
+        "Je me sens souvent débordée par tout ce que j'ai à gérer (travail, famille, charge mentale).",
+        "J'ai du mal à me détendre sans cigarette ni grignotage.",
+        "Je dors mal ou je me réveille déjà fatiguée."
+      ] },
+    { key: "tabac", n: 2, name: "La cigarette",
+      intro: "La première béquille : ce qu'elle vous apporte, et quand.",
+      items: [
+        "Quand je suis stressée ou contrariée, la cigarette est mon premier réflexe.",
+        "Certains moments me semblent impossibles sans cigarette (le café, la pause, la fin de journée).",
+        "La cigarette est souvent la seule vraie pause que je m'accorde."
+      ] },
+    { key: "sucre", n: 3, name: "Le sucre",
+      intro: "La deuxième béquille : celle qui prend le relais quand ça déborde.",
+      items: [
+        "Quand ça déborde, je me tourne vers le sucré, même sans avoir faim.",
+        "Le soir ou après une journée difficile, j'ai du mal à me passer de sucré.",
+        "Quand je fume moins, j'ai encore plus envie de sucré."
+      ] },
+    { key: "culpabilite", n: 4, name: "La culpabilité",
+      intro: "Ce qui relance le cercle : le regard que vous portez sur vous.",
+      items: [
+        "Après une cigarette ou un grignotage, je m'en veux.",
+        "Je me dis souvent : « J'ai déjà essayé, je n'y arriverai pas. »",
+        "J'ai l'impression d'être seule face à tout ça."
+      ] }
+  ];
+
+  /* Dernière étape : le projet */
+  var PROJECT = [
+    { id: "motivation", type: "many", max: 2,
+      stem: "Pourquoi voulez-vous changer maintenant ?",
+      note: "Deux réponses maximum.",
+      options: [
+        { t: "Pour ma santé" }, { t: "Pour mes enfants, ma famille" },
+        { t: "Pour retrouver du souffle et de l'énergie" }, { t: "Pour être fière de moi" },
+        { t: "Pour faire des économies" }, { t: "Pour un projet de grossesse" },
+        { t: "Sur le conseil d'un médecin" }
+      ] },
+    { id: "prete", type: "scale", stem: "À quel point vous sentez-vous prête à être accompagnée pour y arriver ?",
+      ends: ["Pas encore", "Je suis prête"] },
+    { id: "delai", type: "one", stem: "Quand aimeriez-vous commencer ?",
+      options: ["Le plus vite possible", "Dans les prochaines semaines", "Dans quelques mois", "Je me renseigne seulement"] },
+    { id: "format", type: "one", stem: "Quel format vous conviendrait le mieux ?",
+      options: ["Au cabinet", "En ligne (visio)", "Un mélange des deux", "Je ne sais pas encore"] },
+    { id: "sante", type: "one",
+      stem: "Une situation de santé particulière vous concerne-t-elle ? (grossesse, problème cardiaque, trouble alimentaire, suivi pour anxiété ou dépression)",
+      note: "Cela ne vous empêche pas d'être accompagnée : cela permet d'adapter le suivi, en lien avec votre médecin si besoin.",
+      options: ["Non", "Oui", "Je préfère en parler de vive voix"] }
+  ];
+
+  var TOTAL_STEPS = 2 + PILLARS.length;
+  var answers = {};
+  var step = 0;
+
+  var root  = document.getElementById("la-diag");
+  var flow  = document.getElementById("laFlow");
+  var intro = document.getElementById("laIntro");
+  var rail  = document.getElementById("laRail");
+  var prog  = document.getElementById("laProgress");
+  var lbl   = document.getElementById("laStep");
+
+  function save() {
+    try { localStorage.setItem(STORE, JSON.stringify({ a: answers, s: step })); } catch (e) {}
+  }
+  function load() {
+    try {
+      var raw = localStorage.getItem(STORE);
+      if (!raw) return null;
+      var d = JSON.parse(raw);
+      if (d && d.a && typeof d.s === "number") return d;
+    } catch (e) {}
+    return null;
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function optText(o) { return typeof o === "string" ? o : o.t; }
+
+  function buildRail() {
+    rail.innerHTML = "";
+    for (var i = 0; i < TOTAL_STEPS; i++) {
+      var d = document.createElement("div");
+      d.className = "la-seg";
+      rail.appendChild(d);
+    }
+  }
+  function paintRail() {
+    var segs = rail.children;
+    for (var i = 0; i < segs.length; i++) segs[i].className = i < step ? "la-seg la-done" : "la-seg";
+    lbl.textContent = "Étape " + Math.min(step, TOTAL_STEPS) + " / " + TOTAL_STEPS;
+  }
+
+  function scaleHTML(name, value, ends) {
+    var h = '<div class="la-pills">';
+    for (var v = 1; v <= 5; v++) {
+      var id = "la_" + name + "_v" + v;
+      h += '<input type="radio" name="' + name + '" id="' + id + '" value="' + v + '"' +
+           (String(value) === String(v) ? " checked" : "") + '><label for="' + id + '">' + v + '</label>';
+    }
+    ends = ends || ["Pas du tout vrai", "Totalement vrai"];
+    return h + '</div><div class="la-ends"><span>' + ends[0] + '</span><span>' + ends[1] + '</span></div>';
+  }
+
+  function questionHTML(q) {
+    var h = '<div class="la-q">';
+    if (q.type === "text") {
+      h += '<label class="la-stem" for="la_' + q.id + '">' + q.stem + '</label>' +
+           '<input type="text" id="la_' + q.id + '" name="' + q.id + '" autocomplete="given-name" placeholder="' +
+           esc(q.placeholder) + '" value="' + esc(answers[q.id] || "") + '">';
+    } else if (q.type === "scale") {
+      h += '<fieldset><legend class="la-stem">' + q.stem + '</legend>' + scaleHTML(q.id, answers[q.id], q.ends) + '</fieldset>';
+    } else if (q.type === "one") {
+      h += '<fieldset><legend class="la-stem">' + q.stem + '</legend><div class="la-choices">';
+      q.options.forEach(function (o, i) {
+        var t = optText(o), id = "la_" + q.id + "_" + i;
+        h += '<input type="radio" name="' + q.id + '" id="' + id + '" value="' + esc(t) + '"' +
+             (answers[q.id] === t ? " checked" : "") + '><label for="' + id + '">' + esc(t) + '</label>';
+      });
+      h += '</div>' + (q.note ? '<p class="la-hint" style="margin-top:10px">' + q.note + '</p>' : "") + '</fieldset>';
+    } else {
+      var picked = answers[q.id] || [];
+      h += '<fieldset><legend class="la-stem">' + q.stem + '</legend>' +
+           '<div class="la-choices la-multi" data-la-max="' + q.max + '" data-la-group="' + q.id + '">';
+      q.options.forEach(function (o, i) {
+        var id = "la_" + q.id + "_" + i, on = picked.indexOf(o.t) > -1;
+        h += '<input type="checkbox" name="' + q.id + '" id="' + id + '" value="' + esc(o.t) + '"' +
+             (on ? " checked" : (picked.length >= q.max ? " disabled" : "")) +
+             '><label for="' + id + '">' + esc(o.t) + '</label>';
+      });
+      h += '</div><p class="la-hint" style="margin-top:10px">' + q.note + '</p></fieldset>';
+    }
+    return h + '</div>';
+  }
+
+  function navHTML(back) {
+    return '<div class="la-nav">' +
+      '<button class="la-btn" type="button" data-la="next">Continuer</button>' +
+      (back ? '<button class="la-btn la-ghost" type="button" data-la="back">Retour</button>' : "") +
+      '<span class="la-spacer"></span>' +
+      '<p class="la-nag" data-la-nag hidden>Il manque une réponse.</p></div>';
+  }
+
+  function renderList(title, lede, list, back) {
+    var h = '<section class="la-screen la-anim"><h2 class="la-h2">' + title + '</h2><p class="la-lede">' + lede + '</p>';
+    list.forEach(function (q) { h += questionHTML(q); });
+    return h + navHTML(back) + '</section>';
+  }
+
+  function renderPillar(p) {
+    var h = '<section class="la-screen la-anim"><p class="la-kicker">Maillon ' + p.n + ' sur 4</p>' +
+            '<h2 class="la-h2">' + p.name + '</h2><p class="la-lede">' + p.intro + '</p>' +
+            '<p class="la-hint" style="margin-bottom:26px">Pour chaque phrase : <b>1</b> = pas du tout vrai pour moi, <b>5</b> = totalement vrai.</p>';
+    p.items.forEach(function (txt, i) {
+      var name = p.key + "_" + i;
+      h += '<div class="la-q"><fieldset><legend class="la-stem">' + txt + '</legend>' +
+           scaleHTML(name, answers[name]) + '</fieldset></div>';
+    });
+    return h + navHTML(true) + '</section>';
+  }
+
+  function renderGate() {
+    var first = answers.prenom ? String(answers.prenom).trim() : "";
+    return '<section class="la-screen la-anim">' +
+      '<p class="la-kicker">Diagnostic terminé</p>' +
+      '<h2 class="la-h2">' + (first ? esc(first) + ', vos résultats sont prêts.' : 'Vos résultats sont prêts.') + '</h2>' +
+      '<p class="la-lede">Vos quatre scores sont calculés, avec votre niveau de dépendance à la nicotine, le maillon par lequel commencer et un premier pas concret.</p>' +
+      '<p class="la-lede">Indiquez-moi simplement où vous les envoyer : vous les découvrez à l\'écran juste après.</p>' +
+      '<div class="la-nav">' +
+        '<button class="la-btn" type="button" data-la="go">Voir mes résultats</button>' +
+        '<button class="la-btn la-ghost" type="button" data-la="back">Retour</button>' +
+      '</div></section>';
+  }
+
+  function show(html) {
+    intro.hidden = true;
+    flow.innerHTML = html;
+    prog.hidden = (step < 1 || step > TOTAL_STEPS);
+    paintRail();
+    var t = flow.querySelector('input[type="text"]');
+    if (t) { try { t.focus({ preventScroll: true }); } catch (e) {} }
+    root.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function render() {
+    if (step === 0) { flow.innerHTML = ""; intro.hidden = false; prog.hidden = true; return; }
+    if (step === 1) return show(renderList("Votre situation aujourd'hui", "Quelques questions rapides pour faire connaissance.", CONTEXT, false));
+    if (step >= 2 && step <= 1 + PILLARS.length) return show(renderPillar(PILLARS[step - 2]));
+    if (step === TOTAL_STEPS) return show(renderList("Votre projet", "Dernière étape : ce que vous voulez, et comment.", PROJECT, true));
+    show(renderGate());
+  }
+
+  function collect() {
+    var t = flow.querySelector('input[type="text"]');
+    if (t) answers[t.name] = t.value;
+    var radios = flow.querySelectorAll('input[type="radio"]:checked');
+    for (var i = 0; i < radios.length; i++) answers[radios[i].name] = radios[i].value;
+    var groups = flow.querySelectorAll(".la-multi");
+    for (var g = 0; g < groups.length; g++) {
+      var name = groups[g].getAttribute("data-la-group"), picked = [];
+      var boxes = groups[g].querySelectorAll('input[type="checkbox"]:checked');
+      for (var b = 0; b < boxes.length; b++) picked.push(boxes[b].value);
+      answers[name] = picked;
+    }
+  }
+
+  function missingIn(list) {
+    for (var i = 0; i < list.length; i++) {
+      var q = list[i];
+      if (q.type === "text") {
+        var t = flow.querySelector('input[name="' + q.id + '"]');
+        if (t && !t.value.trim()) return t;
+      } else if (!flow.querySelector('input[name="' + q.id + '"]:checked')) {
+        return flow.querySelector('input[name="' + q.id + '"]');
+      }
+    }
+    return null;
+  }
+
+  function missing() {
+    if (step === 1) return missingIn(CONTEXT);
+    if (step === TOTAL_STEPS) return missingIn(PROJECT);
+    if (step >= 2 && step <= 1 + PILLARS.length) {
+      var p = PILLARS[step - 2];
+      for (var k = 0; k < 3; k++) {
+        var n = p.key + "_" + k;
+        if (!flow.querySelector('input[name="' + n + '"]:checked')) return flow.querySelector('input[name="' + n + '"]');
+      }
+    }
+    return null;
+  }
+
+  function pointsOf(qid) {
+    var val = answers[qid], pts = 0;
+    CONTEXT.forEach(function (q) {
+      if (q.id !== qid) return;
+      q.options.forEach(function (o) { if (o.t === val) pts = o.v; });
+    });
+    return pts;
+  }
+
+  function buildResult() {
+    var scores = {}, top = null;
+    PILLARS.forEach(function (p) {
+      var s = 0;
+      for (var i = 0; i < 3; i++) s += Number(answers[p.key + "_" + i] || 0);
+      var pct = Math.round((s - 3) / 12 * 100);
+      scores[p.key] = pct;
+      if (!top || pct > top.pct) top = { k: p.key, pct: pct, name: p.name };
+    });
+    var hsi = pointsOf("cigarettes") + pointsOf("premiere");
+    var dep = hsi <= 1 ? "faible" : (hsi <= 4 ? "moyenne" : "forte");
+    var plusieurs = answers.tentatives === "2 ou 3 fois" || answers.tentatives === "Plus de 3 fois";
+
+    var profil;
+    if (scores.tabac >= 50 && scores.sucre >= 50) profil = "duo";
+    else if (plusieurs && scores.culpabilite >= 50) profil = "cercle";
+    else profil = "soupape";
+
+    var craintes = [];
+    (answers.crainte || []).forEach(function (txt) {
+      CONTEXT.forEach(function (q) {
+        if (q.id !== "crainte") return;
+        q.options.forEach(function (o) { if (o.t === txt && craintes.indexOf(o.p) === -1) craintes.push(o.p); });
+      });
+    });
+
+    return {
+      prenom: (answers.prenom || "").trim(),
+      age: answers.age || "",
+      cigarettes: answers.cigarettes || "",
+      premiere: answers.premiere || "",
+      anciennete: answers.anciennete || "",
+      tentatives: answers.tentatives || "",
+      craintes: craintes,
+      craintesTextes: answers.crainte || [],
+      motivation: answers.motivation || [],
+      prete: Number(answers.prete || 0),
+      delai: answers.delai || "",
+      format: answers.format || "",
+      sante: answers.sante || "",
+      scores: scores,
+      hsi: hsi,
+      dependance: dep,
+      top: top.k,
+      topName: top.name,
+      profil: profil,
+      ts: Date.now()
+    };
+  }
+
+  function goNext() {
+    collect();
+    var miss = missing();
+    var nag = flow.querySelector("[data-la-nag]");
+    if (miss) {
+      if (nag) nag.hidden = false;
+      var box = miss.closest(".la-q") || miss;
+      box.scrollIntoView({ behavior: "smooth", block: "center" });
+      if (miss.type === "text") miss.focus();
+      return;
+    }
+    if (nag) nag.hidden = true;
+    step += 1;
+    if (step === TOTAL_STEPS + 1) {
+      try { localStorage.setItem(RESULT, JSON.stringify(buildResult())); } catch (e) {}
+    }
+    save();
+    render();
+  }
+
+  root.addEventListener("click", function (e) {
+    if (!e.target || !e.target.closest) return;
+    var btn = e.target.closest("[data-la]");
+    if (btn) {
+      var act = btn.getAttribute("data-la");
+      if (act === "next") return goNext();
+      if (act === "back") { collect(); step = Math.max(0, step - 1); save(); return render(); }
+      if (act === "go") {
+        if (PAGE_CAPTURE.indexOf("VOTRE-COMPTE") > -1) { alert("Adresse de la page suivante à renseigner dans le code (ligne PAGE_CAPTURE)."); return; }
+        window.location.href = PAGE_CAPTURE; return;
+      }
+    }
+    if (e.target.id === "laStart") { answers = {}; step = 1; save(); render(); }
+    if (e.target.id === "laResume") { var d = load(); if (d) { answers = d.a; step = d.s; render(); } }
+  });
+
+  root.addEventListener("change", function (e) {
+    var group = e.target.closest ? e.target.closest(".la-multi") : null;
+    if (group) {
+      var max = Number(group.getAttribute("data-la-max")) || 99;
+      var boxes = group.querySelectorAll('input[type="checkbox"]');
+      var n = group.querySelectorAll('input[type="checkbox"]:checked').length;
+      for (var i = 0; i < boxes.length; i++) boxes[i].disabled = (!boxes[i].checked && n >= max);
+    }
+    var nag = flow.querySelector("[data-la-nag]");
+    if (nag) nag.hidden = true;
+  });
+
+  buildRail();
+  var saved = load();
+  if (saved && saved.s > 0) document.getElementById("laResume").hidden = false;
+  render();
+})();
+</script>
+</div>

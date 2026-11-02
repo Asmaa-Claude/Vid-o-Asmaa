@@ -1,0 +1,388 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+#lap-home {
+  --lap-ground:   #F3F4EF;
+  --lap-surface:  #FFFFFF;
+  --lap-surface2: #F8F8F4;
+  --lap-ink:      #22302A;
+  --lap-soft:     #5B6B62;
+  --lap-faint:    #8E9B93;
+  --lap-rule:     #E1E5DD;
+  --lap-firm:     #C9D1C6;
+  --lap-sage:     #46695A;
+  --lap-sage-bg:  #E5EDE7;
+  --lap-rose:     #B5654F;
+  --lap-rose-bg:  #F6E9E4;
+  --lap-display: "Fraunces", Georgia, serif;
+  --lap-body: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  font-family: var(--lap-body);
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--lap-ink);
+  background: var(--lap-ground);
+  text-align: left;
+  -webkit-font-smoothing: antialiased;
+}
+#lap-home *, #lap-home *::before, #lap-home *::after { box-sizing: border-box; }
+#lap-home [hidden] { display: none !important; }
+#lap-home .lap-wrap { max-width: 1040px; margin: 0 auto; padding: 0 20px; }
+#lap-home .lap-narrow { max-width: 720px; }
+#lap-home .lap-section { padding: 72px 0; }
+#lap-home .lap-section + .lap-section { border-top: 1px solid var(--lap-rule); }
+#lap-home .lap-white { background: var(--lap-surface); }
+@media (max-width: 640px) { #lap-home .lap-section { padding: 52px 0; } }
+
+#lap-home p { margin: 0 0 16px; color: var(--lap-ink); }
+#lap-home .lap-kicker {
+  font-size: 12px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--lap-sage); margin: 0 0 16px;
+}
+#lap-home .lap-h1 {
+  font-family: var(--lap-display); font-weight: 400; font-size: 56px; line-height: 1.04;
+  letter-spacing: -.02em; margin: 0 0 22px; color: var(--lap-ink);
+}
+#lap-home .lap-h2 {
+  font-family: var(--lap-display); font-weight: 400; font-size: 38px; line-height: 1.12;
+  letter-spacing: -.01em; margin: 0 0 18px; color: var(--lap-ink);
+}
+#lap-home .lap-h3 { font-family: var(--lap-display); font-weight: 500; font-size: 21px; line-height: 1.25; margin: 0 0 8px; }
+#lap-home .lap-h1 em, #lap-home .lap-h2 em { font-style: italic; color: var(--lap-sage); }
+@media (max-width: 640px) {
+  #lap-home .lap-h1 { font-size: 36px; }
+  #lap-home .lap-h2 { font-size: 29px; }
+}
+#lap-home .lap-lede { font-size: 19px; color: var(--lap-soft); max-width: 600px; }
+#lap-home .lap-soft { color: var(--lap-soft); }
+#lap-home .lap-hint { font-size: 14px; color: var(--lap-faint); margin: 12px 0 0; }
+
+/* Barre du haut */
+#lap-home .lap-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
+#lap-home .lap-brand { font-family: var(--lap-display); font-size: 22px; color: var(--lap-ink); }
+#lap-home .lap-brand em { font-style: italic; color: var(--lap-sage); }
+#lap-home .lap-top .lap-btn { padding: 10px 18px; font-size: 14px; }
+@media (max-width: 480px) { #lap-home .lap-top .lap-btn { display: none; } }
+
+/* Boutons */
+#lap-home .lap-btn {
+  font-family: var(--lap-body); font-weight: 700; font-size: 16px; letter-spacing: .01em;
+  padding: 16px 30px; border-radius: 4px; border: 1px solid var(--lap-sage);
+  background: var(--lap-sage); color: #fff; cursor: pointer; text-decoration: none;
+  display: inline-block; line-height: 1.3; transition: opacity .16s;
+}
+#lap-home .lap-btn:hover { opacity: .88; color: #fff; }
+#lap-home .lap-btn:focus-visible { outline: 2px solid var(--lap-sage); outline-offset: 3px; }
+
+/* Héros */
+#lap-home .lap-hero { padding: 48px 0 80px; }
+#lap-home .lap-facts { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 18px; font-size: 14px; color: var(--lap-soft); }
+#lap-home .lap-facts b { color: var(--lap-ink); }
+
+/* Citations */
+#lap-home .lap-quotes { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 28px; }
+@media (max-width: 640px) { #lap-home .lap-quotes { grid-template-columns: 1fr; } }
+#lap-home .lap-quote {
+  font-family: var(--lap-display); font-style: italic; font-size: 20px; line-height: 1.35;
+  background: var(--lap-surface2); border: 1px solid var(--lap-rule); border-left: 3px solid var(--lap-rose);
+  border-radius: 4px; padding: 20px 22px; margin: 0; color: var(--lap-ink);
+}
+
+/* Le cercle */
+#lap-home .lap-cycle { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 32px 0 20px; counter-reset: lapc; }
+@media (max-width: 760px) { #lap-home .lap-cycle { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 420px) { #lap-home .lap-cycle { grid-template-columns: 1fr; } }
+#lap-home .lap-link {
+  position: relative; background: var(--lap-surface); border: 1px solid var(--lap-rule);
+  border-radius: 6px; padding: 22px 20px 20px;
+}
+#lap-home .lap-link::before {
+  counter-increment: lapc; content: counter(lapc);
+  display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%;
+  background: var(--lap-sage-bg); color: var(--lap-sage); font-weight: 700; font-size: 14px; margin-bottom: 12px;
+}
+#lap-home .lap-link.lap-first { border-color: var(--lap-sage); }
+#lap-home .lap-link.lap-first::before { background: var(--lap-sage); color: #fff; }
+#lap-home .lap-link p { font-size: 15px; color: var(--lap-soft); margin: 0; }
+#lap-home .lap-loop { font-size: 15px; color: var(--lap-soft); }
+
+/* Piliers */
+#lap-home .lap-grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 30px; }
+@media (max-width: 760px) { #lap-home .lap-grid3 { grid-template-columns: 1fr; } }
+#lap-home .lap-tile { background: var(--lap-surface2); border: 1px solid var(--lap-rule); border-radius: 6px; padding: 24px; }
+#lap-home .lap-tile p { font-size: 15px; color: var(--lap-soft); margin: 0; }
+#lap-home .lap-tag {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--lap-sage); background: var(--lap-sage-bg); padding: 3px 8px; border-radius: 3px; margin-bottom: 12px;
+}
+
+/* Comparaison */
+#lap-home .lap-compare { margin-top: 28px; border: 1px solid var(--lap-rule); border-radius: 6px; overflow: hidden; background: var(--lap-surface); }
+#lap-home .lap-row { display: grid; grid-template-columns: 1fr 1fr; }
+#lap-home .lap-row + .lap-row { border-top: 1px solid var(--lap-rule); }
+#lap-home .lap-row > div { padding: 16px 20px; font-size: 15px; }
+#lap-home .lap-row > div:first-child { color: var(--lap-faint); text-decoration: line-through; text-decoration-color: rgba(142,155,147,.5); }
+#lap-home .lap-row > div:last-child { background: var(--lap-sage-bg); color: var(--lap-ink); font-weight: 500; }
+#lap-home .lap-row.lap-head > div { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; text-decoration: none; }
+#lap-home .lap-row.lap-head > div:first-child { color: var(--lap-soft); }
+#lap-home .lap-row.lap-head > div:last-child { color: var(--lap-sage); }
+
+/* Diagnostic */
+#lap-home .lap-diag {
+  background: var(--lap-ink); color: #fff; border-radius: 8px; padding: 48px;
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 40px; align-items: center;
+}
+@media (max-width: 760px) { #lap-home .lap-diag { grid-template-columns: 1fr; padding: 30px 24px; gap: 24px; } }
+#lap-home .lap-diag .lap-h2, #lap-home .lap-diag p { color: #fff; }
+#lap-home .lap-diag .lap-h2 em { color: #B9D3C3; }
+#lap-home .lap-diag .lap-kicker { color: #B9D3C3; }
+#lap-home .lap-diag .lap-soft { color: #C8D2CC; }
+#lap-home .lap-list { list-style: none; margin: 0 0 26px; padding: 0; }
+#lap-home .lap-list li { position: relative; padding: 0 0 12px 28px; font-size: 15px; line-height: 1.5; }
+#lap-home .lap-list li::before {
+  content: ""; position: absolute; left: 0; top: 5px; width: 14px; height: 8px;
+  border-left: 2px solid #B9D3C3; border-bottom: 2px solid #B9D3C3; transform: rotate(-45deg);
+}
+#lap-home .lap-diag .lap-btn { background: #fff; border-color: #fff; color: var(--lap-ink); }
+#lap-home .lap-diag .lap-btn:hover { color: var(--lap-ink); }
+#lap-home .lap-diag .lap-hint { color: #9FB0A6; }
+
+/* À propos */
+#lap-home .lap-about { display: grid; grid-template-columns: 120px 1fr; gap: 28px; align-items: start; }
+@media (max-width: 560px) { #lap-home .lap-about { grid-template-columns: 1fr; } }
+#lap-home .lap-mono {
+  width: 120px; height: 120px; border-radius: 50%; background: var(--lap-sage-bg);
+  display: grid; place-items: center; font-family: var(--lap-display); font-style: italic;
+  font-size: 54px; color: var(--lap-sage);
+}
+
+/* FAQ */
+#lap-home .lap-faq { margin-top: 24px; }
+#lap-home .lap-faq details { border-top: 1px solid var(--lap-rule); }
+#lap-home .lap-faq details:last-child { border-bottom: 1px solid var(--lap-rule); }
+#lap-home .lap-faq summary {
+  cursor: pointer; list-style: none; padding: 20px 36px 20px 0; position: relative;
+  font-weight: 600; font-size: 17px; color: var(--lap-ink);
+}
+#lap-home .lap-faq summary::-webkit-details-marker { display: none; }
+#lap-home .lap-faq summary::after {
+  content: "+"; position: absolute; right: 4px; top: 16px; font-size: 24px; font-weight: 400; color: var(--lap-sage);
+}
+#lap-home .lap-faq details[open] summary::after { content: "–"; }
+#lap-home .lap-faq details p { color: var(--lap-soft); padding-right: 36px; }
+
+/* Fin */
+#lap-home .lap-final { text-align: center; }
+#lap-home .lap-final .lap-lede { margin: 0 auto 28px; }
+#lap-home .lap-foot { padding: 28px 0 40px; font-size: 13px; color: var(--lap-faint); text-align: center; border-top: 1px solid var(--lap-rule); }
+#lap-home .lap-foot p { color: var(--lap-faint); margin: 0 0 6px; }
+</style>
+
+<div id="lap-home">
+
+  <div class="lap-wrap">
+    <header class="lap-top">
+      <span class="lap-brand">Libre <em>&amp;</em> Apaisée</span>
+      <a class="lap-btn" href="#" data-lap-cta>Faire le diagnostic</a>
+    </header>
+  </div>
+
+  <!-- Héros -->
+  <section class="lap-hero">
+    <div class="lap-wrap">
+      <p class="lap-kicker">Assia, infirmière · au cabinet et en ligne</p>
+      <h1 class="lap-h1">Et si, pour arrêter le tabac et le sucre, on commençait par <em>votre stress</em>&nbsp;?</h1>
+      <p class="lap-lede">J'accompagne les femmes qui veulent se libérer du tabac et du sucre, en travaillant d'abord sur ce qui les déclenche : le stress. Des outils concrets, des substituts nicotiniques bien dosés et un suivi sans jugement.</p>
+      <a class="lap-btn" href="#" data-lap-cta>Faire mon diagnostic gratuit</a>
+      <div class="lap-facts">
+        <span><b>6 minutes</b></span>
+        <span><b>24</b> questions</span>
+        <span>Résultats <b>immédiats</b></span>
+        <span>Sans jugement</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Vous vous reconnaissez -->
+  <section class="lap-section lap-white">
+    <div class="lap-wrap">
+      <p class="lap-kicker">Vous vous reconnaissez ?</p>
+      <h2 class="lap-h2">Ces phrases, vous vous les êtes <em>peut-être déjà dites</em>.</h2>
+      <div class="lap-quotes">
+        <blockquote class="lap-quote">« Sans ma cigarette, je ne tiens pas le coup. »</blockquote>
+        <blockquote class="lap-quote">« Quand je stresse, il me faut du sucré. »</blockquote>
+        <blockquote class="lap-quote">« Si j'arrête, je vais grossir. »</blockquote>
+        <blockquote class="lap-quote">« J'ai déjà essayé, je n'y arrive pas. »</blockquote>
+      </div>
+      <p class="lap-soft" style="margin-top:26px">La charge mentale, le travail, la famille, peu de temps pour vous… La cigarette arrive toujours aux mêmes moments, le sucré prend le relais le soir, et les tentatives d'arrêt finissent par céder au premier coup de stress. Si c'est votre cas, ce n'est pas une question de volonté.</p>
+    </div>
+  </section>
+
+  <!-- Le cercle -->
+  <section class="lap-section">
+    <div class="lap-wrap">
+      <p class="lap-kicker">Pourquoi ça ne tient pas</p>
+      <h2 class="lap-h2">La cigarette et le sucre calment <em>le même stress</em>.</h2>
+      <p class="lap-lede">Tant qu'on s'attaque à la cigarette ou au sucre sans toucher au stress, on déplace la béquille. Voici le cercle qui vous retient :</p>
+      <div class="lap-cycle">
+        <div class="lap-link lap-first"><h3 class="lap-h3">Le stress</h3><p>La tension monte : travail, enfants, imprévus.</p></div>
+        <div class="lap-link"><h3 class="lap-h3">L'envie</h3><p>Le corps réclame une pause, tout de suite.</p></div>
+        <div class="lap-link"><h3 class="lap-h3">La cigarette ou le sucre</h3><p>Ils soulagent… pour quelques minutes.</p></div>
+        <div class="lap-link"><h3 class="lap-h3">La culpabilité</h3><p>On s'en veut, et le stress repart de plus belle.</p></div>
+      </div>
+      <p class="lap-loop">↻ Et le cercle recommence. C'est pour cela que l'accompagnement commence par le premier maillon : <b>le stress</b>.</p>
+    </div>
+  </section>
+
+  <!-- La méthode -->
+  <section class="lap-section lap-white">
+    <div class="lap-wrap">
+      <p class="lap-kicker">La méthode</p>
+      <h2 class="lap-h2">Le stress d'abord, puis le tabac et le sucre, <em>ensemble</em>.</h2>
+      <div class="lap-grid3">
+        <div class="lap-tile">
+          <span class="lap-tag">Point de départ</span>
+          <h3 class="lap-h3">Le stress</h3>
+          <p>Des outils simples pour vous apaiser sur le moment, et des habitudes qui le font baisser au quotidien.</p>
+        </div>
+        <div class="lap-tile">
+          <span class="lap-tag">Pilier 2</span>
+          <h3 class="lap-h3">Le tabac</h3>
+          <p>Des substituts nicotiniques bien dosés et le suivi d'une infirmière, pour passer le cap du manque.</p>
+        </div>
+        <div class="lap-tile">
+          <span class="lap-tag">Pilier 3</span>
+          <h3 class="lap-h3">Le sucre</h3>
+          <p>Comprendre vos envies, sans régime ni interdit, pour retrouver une relation apaisée au sucre.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- La différence -->
+  <section class="lap-section">
+    <div class="lap-wrap lap-narrow">
+      <p class="lap-kicker">Ce qui change</p>
+      <h2 class="lap-h2">Remplacer, <em>plutôt que se priver</em>.</h2>
+      <div class="lap-compare">
+        <div class="lap-row lap-head"><div>Ce qu'on propose souvent</div><div>Ce que je vous propose</div></div>
+        <div class="lap-row"><div>Traiter la cigarette, puis le sucre, chacun de son côté</div><div>Les accompagner ensemble, en partant du stress qui les relie</div></div>
+        <div class="lap-row"><div>Compter sur la volonté</div><div>Des outils concrets, à utiliser dès que l'envie arrive</div></div>
+        <div class="lap-row"><div>Interdire, supprimer, se priver</div><div>Créer de nouvelles pauses qui apaisent vraiment</div></div>
+        <div class="lap-row"><div>Un arrêt promis « en une séance »</div><div>Un suivi sur 8 à 10 semaines, au cabinet ou en ligne</div></div>
+        <div class="lap-row"><div>Des conseils généraux</div><div>Des substituts nicotiniques adaptés, avec le regard d'une infirmière</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Le diagnostic -->
+  <section class="lap-section">
+    <div class="lap-wrap">
+      <div class="lap-diag">
+        <div>
+          <p class="lap-kicker">Le diagnostic gratuit</p>
+          <h2 class="lap-h2">Découvrez par quel maillon <em>commencer</em>.</h2>
+          <p class="lap-soft">En 6 minutes, vous répondez à 24 questions sur votre stress, la cigarette, le sucre et votre parcours. Vos résultats s'affichent tout de suite.</p>
+        </div>
+        <div>
+          <ul class="lap-list">
+            <li>Votre profil parmi trois : la cigarette-soupape, le duo cigarette et sucre, le cercle de la culpabilité</li>
+            <li>Le poids de chaque maillon : stress, cigarette, sucre, culpabilité</li>
+            <li>Votre niveau de dépendance à la nicotine</li>
+            <li>Un premier pas concret, à faire dès aujourd'hui</li>
+          </ul>
+          <a class="lap-btn" href="#" data-lap-cta>Je fais mon diagnostic</a>
+          <p class="lap-hint">Gratuit · confidentiel · sans engagement</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section class="lap-section lap-white">
+    <div class="lap-wrap lap-narrow">
+      <div class="lap-about">
+        <div class="lap-mono" aria-hidden="true">A</div>
+        <div>
+          <p class="lap-kicker">Qui suis-je</p>
+          <h2 class="lap-h2">Je suis Assia, <em>infirmière</em>.</h2>
+          <p>J'accompagne les femmes qui veulent arrêter de fumer et se libérer du sucre. Ce que je fais différemment, c'est que je commence par le stress : c'est souvent lui qui pousse vers la cigarette ou le paquet de biscuits.</p>
+          <p>En tant qu'infirmière, je connais le corps, j'adapte les substituts nicotiniques et je vous oriente vers votre médecin quand il le faut. On avance ensemble, à votre rythme, au cabinet ou en ligne, et sans jamais vous juger.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="lap-section">
+    <div class="lap-wrap lap-narrow">
+      <p class="lap-kicker">Vos questions</p>
+      <h2 class="lap-h2">Ce qu'on me demande <em>souvent</em>.</h2>
+      <div class="lap-faq">
+        <details>
+          <summary>Est-ce que je vais grossir si j'arrête de fumer ?</summary>
+          <p>C'est l'une des craintes les plus fréquentes, et c'est justement pour cela que le sucre fait partie de l'accompagnement dès le départ. Sans régime ni interdit, on prépare d'autres pauses pour que le sucré ne prenne pas la place de la cigarette.</p>
+        </details>
+        <details>
+          <summary>J'ai déjà essayé plusieurs fois. Pourquoi ça marcherait cette fois ?</summary>
+          <p>Si vos essais passés n'ont pas tenu, c'est souvent qu'il manquait des outils face au stress, pas du courage. Ici, on travaille d'abord ce qui déclenche l'envie, avec un suivi dans la durée plutôt qu'un geste unique.</p>
+        </details>
+        <details>
+          <summary>La cigarette ne m'aide-t-elle pas à gérer mon stress ?</summary>
+          <p>Elle donne l'impression de calmer, mais elle entretient le stress : le soulagement vient surtout du manque de nicotine qui s'apaise, puis revient. Les études montrent qu'arrêter de fumer est associé, avec le temps, à un peu moins d'anxiété et de stress.</p>
+        </details>
+        <details>
+          <summary>Comment se passe l'accompagnement ?</summary>
+          <p>Il dure 8 à 10 semaines, au cabinet ou en ligne. Tout commence par le diagnostic, puis un appel gratuit de 20 minutes pour faire le point ensemble sur vos réponses et voir si l'accompagnement vous correspond.</p>
+        </details>
+        <details>
+          <summary>Et si je ne me sens pas encore prête ?</summary>
+          <p>Le diagnostic n'engage à rien. Il vous aide à comprendre ce qui se passe chez vous, et vous repartez avec un premier pas concret, que vous choisissiez d'être accompagnée ou non.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Appel final -->
+  <section class="lap-section lap-white lap-final">
+    <div class="lap-wrap lap-narrow">
+      <h2 class="lap-h2">Libre face au tabac et au sucre. <em>Apaisée face au stress.</em></h2>
+      <p class="lap-lede">Le premier pas prend 6 minutes : comprendre ce qui vous retient.</p>
+      <a class="lap-btn" href="#" data-lap-cta>Faire mon diagnostic gratuit</a>
+    </div>
+  </section>
+
+  <footer class="lap-foot">
+    <div class="lap-wrap">
+      <p>Assia, infirmière · Libre &amp; Apaisée · au cabinet et en ligne</p>
+      <p>Les informations de cette page ne remplacent pas une consultation médicale.</p>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    "use strict";
+
+    /* ====== LA SEULE LIGNE À MODIFIER ======
+       Collez ici l'adresse de la page du diagnostic (page 1 du tunnel). */
+    var PAGE_DIAGNOSTIC = "https://afarg26.systeme.io/VOTRE-PAGE-DIAGNOSTIC";
+    /* ======================================= */
+
+    var root = document.getElementById("lap-home");
+    if (!root) return;
+    var pasPrete = PAGE_DIAGNOSTIC.indexOf("VOTRE-PAGE") > -1;
+    var ctas = root.querySelectorAll("[data-lap-cta]");
+    for (var i = 0; i < ctas.length; i++) {
+      ctas[i].setAttribute("href", pasPrete ? "#" : PAGE_DIAGNOSTIC);
+    }
+    root.addEventListener("click", function (e) {
+      var a = e.target && e.target.closest ? e.target.closest("[data-lap-cta]") : null;
+      if (a && pasPrete) {
+        e.preventDefault();
+        alert("Adresse de la page du diagnostic à renseigner dans le code (ligne PAGE_DIAGNOSTIC).");
+      }
+    });
+  })();
+  </script>
+</div>
